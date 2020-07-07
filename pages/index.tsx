@@ -5,6 +5,7 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Date from '../components/date'
+import axios from 'axios'
 
 export default function Home({
   allPostsData
@@ -41,6 +42,7 @@ export default function Home({
               </small>
             </li>
           ))}
+          {/* {allSSRData} */}
         </ul>
       </section>
     </Layout>
@@ -51,9 +53,16 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async () => {
 // export async function getStaticProps() { // JS expression
   const allPostsData = getSortedPostsData()
+  // const response = await fetch("http://localhost:3000/api/getTest?query=0001029");
+  const response = axios.get('http://localhost:3000/api/getTest?query=0001',{
+    params: {
+      ID: 12345,
+    }
+  });
   return {
     props: {
-      allPostsData
+      allPostsData,
+      // response
     }
   }
 }
@@ -61,9 +70,12 @@ export const getStaticProps: GetStaticProps = async () => {
 // Fetch external data then rendering HTML in every request.
 // Server Side Rendering Implement
 // export async function getServerSideProps(context) {
+//   console.log(context.params)
+//   const allSSRData = 'SSR'
 //   return {
 //     props: {
 //       // コンポーネントに渡すための props
+//       allSSRData,
 //     }
 //   }
 // }

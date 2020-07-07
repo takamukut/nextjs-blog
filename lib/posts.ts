@@ -39,7 +39,7 @@ export function getSortedPostsData() {
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
 
-  // 以下のような配列を返します:
+  // 以下のような配列を返す:
   // [
   //   {
   //     params: {
